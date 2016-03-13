@@ -2,7 +2,7 @@
  * This template takes a single argument, a String containing a
  * message to display.
  *@
-@(message: String)
+@()
 
 @import play.i18n._
 @*
@@ -13,10 +13,12 @@
 @main("Welcome to Play") {
 
     @messages.at("hello")
-    @*
-     * Get an `Html` object by calling the built-in Play welcome
-     * template and passing a `String` message.
-     *@
-    @play20.welcome(message, style = "Java")
+
+    <br />
+    <br />
+    <a href="@routes.HomeController.langTest("en")">Switch to English</a>
+    <br />
+    <br />
+    <a href="@routes.HomeController.langTest("sv")">Switch to Swedish</a>
 
 }

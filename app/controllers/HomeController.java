@@ -11,14 +11,18 @@ import views.html.*;
  */
 public class HomeController extends Controller {
 
-    /**
-     * An action that renders an HTML page with a welcome message.
-     * The configuration in the <code>routes</code> file means that
-     * this method will be called when the application receives a
-     * <code>GET</code> request with a path of <code>/</code>.
-     */
     public Result index() {
-        return ok(index.render("Your new application is ready."));
+        return redirect(routes.HomeController.langTest("en"));
     }
 
+    public Result langTest(String lang) {
+        Logger.info("HomeController::langTest({}) || hello -> {}", lang, ctx().messages().at("hello"));
+
+        /**
+         * Setting transient lang here does not work either
+         */
+        //ctx().setTransientLang(lang);
+
+        return ok(index.render());
+    }
 }
