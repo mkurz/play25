@@ -1,6 +1,9 @@
 package controllers;
 
+import javax.inject.Inject;
+
 import play.*;
+import play.i18n.MessagesApi;
 import play.mvc.*;
 
 import views.html.*;
@@ -11,12 +14,15 @@ import views.html.*;
  */
 public class HomeController extends Controller {
 
+    @Inject
+    MessagesApi messagesApi;
+
     public Result index() {
         return redirect(routes.HomeController.langTest("en"));
     }
 
     public Result langTest(String lang) {
-        Logger.info("HomeController::langTest({}) || hello -> {}", lang, ctx().messages().at("hello"));
+        Logger.info("HomeController::langTest({}) || hello -> {}", lang, messagesApi.get(ctx().lang(), "hello"));
 
         /**
          * Setting transient lang here does not work either
